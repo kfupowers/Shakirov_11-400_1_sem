@@ -41,7 +41,7 @@ public class HttpClientExample implements HttpClient{
                 postConnection.setRequestProperty(header.getKey(), header.getValue());
             }
             postConnection.setConnectTimeout(1000);
-            postConnection.setReadTimeout(1000);
+            postConnection.setReadTimeout(1100);
             postConnection.setDoOutput(true);
             String jsonInput = new ObjectMapper().writeValueAsString(data);
             try (OutputStream outputStream = postConnection.getOutputStream()) {
