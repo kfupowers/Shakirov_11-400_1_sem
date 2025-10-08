@@ -1,4 +1,4 @@
-package ru.kpfu.itis.shakirov;
+package ru.kpfu.itis.shakirov.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
