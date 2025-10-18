@@ -25,7 +25,8 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String uri = httpServletRequest.getRequestURI();
         HttpSession session = httpServletRequest.getSession(false);
-        if (session == null && !uri.contains("login") && !uri.contains("hello") && !uri.contains("sign_up") && !uri.contains("index")) {
+        if (session == null && !uri.contains("login") && !uri.contains("hello") && !uri.contains("sign_up")
+                && !uri.contains("index") && !uri.contains("handle")) {
             ((HttpServletResponse) response).sendRedirect("/login");
         } else {
             chain.doFilter(request, response);

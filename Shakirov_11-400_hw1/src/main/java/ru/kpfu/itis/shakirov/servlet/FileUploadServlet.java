@@ -1,6 +1,8 @@
-package ru.kpfu.itis.shakirov.filter;
+package ru.kpfu.itis.shakirov.servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,16 +13,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 
+@WebServlet("/upload")
+@MultipartConfig(
+        maxFileSize = 5 * 1024 * 1024,
+        maxRequestSize = 10 * 1024 * 1024
+)
 public class FileUploadServlet extends HttpServlet {
 
-    public static final String FILE_PREFIX = "/tmp";
+    public static final String FILE_PREFIX = "C:/tmp";
     public static final int DIRECTORIES_COUNT = 100;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Part part = req.getPart("file");
+        String text = req.getParameter("text");
         String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
-        File file = new File(FILE_PREFIX + File.separator + filename.hashCode() % DIRECTORIES_COUNT +File.separator + filename);
+        File file = new File(FILE_PREFIX + File.separator
+                + Math.abs(filename.hashCode() % DIRECTORIES_COUNT) + File.separator + filename);
 
         InputStream content = part.getInputStream();
         file.getParentFile().mkdirs();

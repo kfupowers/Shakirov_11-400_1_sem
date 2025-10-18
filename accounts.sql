@@ -5,6 +5,7 @@ CREATE TABLE oris.accounts(
     password VARCHAR(200) NOT NULL ,
     name VARCHAR(50) NOT NULL ,
     lastname VARCHAR(50) NOT NULL,
+    path VARCHAR(300) NOT NULL,
     CONSTRAINT id_pk PRIMARY KEY (id),
     CONSTRAINT login_uk UNIQUE (login)
 );

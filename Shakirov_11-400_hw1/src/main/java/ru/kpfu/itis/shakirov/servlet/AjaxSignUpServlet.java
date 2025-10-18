@@ -16,7 +16,7 @@ public class AjaxSignUpServlet extends HttpServlet {
         resp.setContentType("text/plain");
         String login = req.getParameter("login");
 
-        if (new UserServiceImpl().getByLogin(login)) {
+        if (new UserServiceImpl().getByLogin(login) != null) {
             resp.getWriter().write("User with this login already exists!");
         }
     }

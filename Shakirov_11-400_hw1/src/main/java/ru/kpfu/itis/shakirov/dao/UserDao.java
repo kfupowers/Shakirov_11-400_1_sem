@@ -15,5 +15,5 @@ public interface UserDao {
 
     boolean getByLoginAndPassword(String login, String password);
 
-    boolean getByLogin(String login);
+    User getByLogin(String login);
 }

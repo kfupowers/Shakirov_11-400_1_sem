@@ -1,14 +1,24 @@
 package ru.kpfu.itis.shakirov.servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import ru.kpfu.itis.shakirov.util.FileUploadUtil;
+import javax.servlet.http.Part;
 import java.io.IOException;
+
 import ru.kpfu.itis.shakirov.service.impl.UserServiceImpl;
 
 @WebServlet(name = "SignUp", urlPatterns = "/sign_up")
+@MultipartConfig(
+        maxFileSize = 5 * 1024 * 1024,
+        maxRequestSize = 10 * 1024 * 1024
+)
 public class SignUpServlet extends HttpServlet {
 
     @Override
@@ -23,9 +33,12 @@ public class SignUpServlet extends HttpServlet {
         String password = req.getParameter("password");
         String name = req.getParameter("name");
         String lastname = req.getParameter("lastname");
+        Part part = req.getPart("file");
 
-        if (new UserServiceImpl().signUp(login, password, name, lastname)) {
+        String path = FileUploadUtil.upload(part);
+        if (new UserServiceImpl().signUp(login, password, name, lastname, path)) {
             resp.sendRedirect("login");
+
         } else {
             resp.sendRedirect("bad_sing_up.ftl");
         }

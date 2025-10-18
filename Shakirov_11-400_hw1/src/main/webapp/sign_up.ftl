@@ -7,18 +7,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel = "styleshit">
-
-    <script>
-        $(document).on("change", "#ajax-button", function () {
-
-            document.getElementById('mySubmit').disabled = true;
-
-
-            $.get("/ajax/sign_up_check", function (response) {
-                $("#ajax-response").text(response)
-            });
-        })
-    </script>
 </head>
 
 <body>
@@ -35,16 +23,14 @@
     <input type="submit" value="logout">
 </form>
 
-<form method="post" action="/sign_up">
+<form action="/sign_up" method="post" enctype="multipart/form-data">
     Login:
     <input type="text" name="login" id="login-text" placeholder="type your login here">
     <div class="flex-box" id="ajax-response">
     </div>
-    <form></form>
     <script>
         $("#login-text").on("input", function () {
-            $("#mySubmit").prop('disabled', true);
-
+            $("#mySubmit").prop('disabled', true)
             $.post("/ajax/sign_up_check", {login : document.getElementById("login-text").value}, function (response) {
                 $("#ajax-response").text(response)
                 if(response.toString() != "User with this login already exists!") {
@@ -62,6 +48,9 @@
     <br>
     Lastname:
     <input type="text" name="lastname" placeholder="type your lastname here">
+    <br>
+    Avatar:
+    <input type="file" name="file">
     <br>
     <input type="submit" id="mySubmit" value="signUp">
 </form>

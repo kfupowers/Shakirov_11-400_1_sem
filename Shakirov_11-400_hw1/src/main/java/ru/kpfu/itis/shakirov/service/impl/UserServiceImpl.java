@@ -8,6 +8,7 @@ import ru.kpfu.itis.shakirov.service.UserService;
 import ru.kpfu.itis.shakirov.util.DatabaseConnectionUtil;
 import ru.kpfu.itis.shakirov.util.PasswordUtil;
 
+import javax.servlet.http.Part;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -25,9 +26,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean signUp(String login, String password, String name, String lastname) {
+    public boolean signUp(String login, String password, String name, String lastname, String path) {
         try {
-            return userDao.save(new User(null, name, lastname, login, PasswordUtil.encrypt(password)));
+            return userDao.save(new User(null, name, lastname, login, PasswordUtil.encrypt(password), path));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -39,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean getByLogin(String login) {
+    public User getByLogin(String login) {
         return userDao.getByLogin(login);
     }
 

@@ -8,6 +8,10 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 
 public class FileUploadUtil {
+
+    public static final String FILE_PREFIX = "C:/Users/Ra/IdeaProjects/Shakirov_400_hw1/Shakirov_11-400_hw1/src/main/webapp/tmp";
+    public static final int DIRECTORIES_COUNT = 100;
+
     public static String upload(Part part) throws IOException {
         String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
@@ -22,6 +26,6 @@ public class FileUploadUtil {
         content.read(buffer);
         outputStream.write(buffer);
         outputStream.close();
-        return filename;
+        return "tmp/" + Math.abs(filename.hashCode() % DIRECTORIES_COUNT) + File.separator + filename;
     }
 }

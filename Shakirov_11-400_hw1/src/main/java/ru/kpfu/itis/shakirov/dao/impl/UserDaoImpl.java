@@ -31,7 +31,8 @@ public class UserDaoImpl implements UserDao {
                                     resultSet.getString("name"),
                                     resultSet.getString("lastname"),
                                     resultSet.getString("login"),
-                                    resultSet.getString("password")
+                                    resultSet.getString("password"),
+                                    resultSet.getString("path")
                             )
                     );
                 }
@@ -45,7 +46,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean save(User user) {
-        String sql = "insert into oris.accounts (name, lastname, login, password) values (?, ?, ?, ?)";
+        String sql = "insert into oris.accounts (name, lastname, login, password, path) values (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -53,6 +54,7 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(2, user.getLastname());
             preparedStatement.setString(3, user.getLogin());
             preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(5, user.getPath());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -71,6 +73,7 @@ public class UserDaoImpl implements UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
+            ResultSet rs = preparedStatement.executeQuery();
             return preparedStatement.executeQuery().next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -78,12 +81,23 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean getByLogin(String login) {
+    public User getByLogin(String login) {
         String sql = "select * from oris.accounts where login = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, login);
-            return preparedStatement.executeQuery().next() ;
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+            return new User(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("lastname"),
+                    rs.getString("login"),
+                    rs.getString("password"),
+                    rs.getString("path")
+            );
+            }
+            else return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

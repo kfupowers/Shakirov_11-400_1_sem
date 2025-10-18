@@ -7,15 +7,17 @@ public class User {
     private String lastname;
     private String login;
     private String password;
+    private String path;
 
     public User() {}
 
-    public User(Integer id, String name, String lastname, String login, String password) {
+    public User(Integer id, String name, String lastname, String login, String password, String path) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.login = login;
         this.password = password;
+        this.path = path;
     }
 
     public Integer getId() {
@@ -36,6 +38,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getPath() {
+        return path;
     }
 }
 

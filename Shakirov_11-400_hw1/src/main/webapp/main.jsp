@@ -1,3 +1,5 @@
+<%@ page import="ru.kpfu.itis.shakirov.util.DatabaseConnectionUtil" %>
+<%@ page import="ru.kpfu.itis.shakirov.service.impl.UserServiceImpl" %>
 <%@ page contentType="text/html; UTF-8" language="java" %>
 
 <html>
@@ -21,11 +23,14 @@
     <input type="submit" value="users">
 </form>
 
+<img src="">
+
 <%
     String sessionUser = (String) session.getAttribute("user");
     if (sessionUser == null) {
         response.sendRedirect("login.ftl");
     }
+
 
     String cookieUser = "";
     String sessionId = "";
@@ -41,6 +46,8 @@
     } else {
         sessionId = session.getId();
     }
+    String path = new UserServiceImpl().getByLogin(sessionUser).getPath();
+    System.out.println("Original path: " + path);
 %>
 
 <h3>
@@ -50,6 +57,8 @@
     <br>
     Cookie userForHttp = <%=cookieUser%>
 </h3>
+
+<img src="<%=path%>"  alt="dsd dsds"/>
 
 </body>
 
