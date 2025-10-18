@@ -1,4 +1,4 @@
-package com.solncev.util;
+package ru.kpfu.itis.shakirov.util;
 
 import jakarta.xml.bind.DatatypeConverter;
 

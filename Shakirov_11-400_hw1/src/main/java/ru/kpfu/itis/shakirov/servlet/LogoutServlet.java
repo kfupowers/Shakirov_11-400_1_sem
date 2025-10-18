@@ -1,4 +1,4 @@
-package com.solncev.servlet;
+package ru.kpfu.itis.shakirov.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +36,6 @@ public class LogoutServlet extends HttpServlet {
             }
         }
 
-        resp.sendRedirect("index.html");
+        resp.sendRedirect("index.ftl");
     }
 }

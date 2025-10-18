@@ -1,4 +1,4 @@
-package com.solncev.http;
+package ru.kpfu.itis.shakirov.http;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package com.solncev.entity;
+package ru.kpfu.itis.shakirov.entity;
 
 public class User {
 

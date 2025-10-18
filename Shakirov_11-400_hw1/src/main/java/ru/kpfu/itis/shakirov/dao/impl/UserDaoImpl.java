@@ -1,8 +1,8 @@
-package com.solncev.dao.impl;
+package ru.kpfu.itis.shakirov.dao.impl;
 
-import com.solncev.dao.UserDao;
-import com.solncev.entity.User;
-import com.solncev.util.DatabaseConnectionUtil;
+import ru.kpfu.itis.shakirov.dao.UserDao;
+import ru.kpfu.itis.shakirov.entity.User;
+import ru.kpfu.itis.shakirov.util.DatabaseConnectionUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAll() {
-        String sql = "select * from users";
+        String sql = "select * from oris.accounts";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -44,8 +44,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void save(User user) {
-        String sql = "insert into users (name, lastname, login, password) values (?, ?, ?, ?)";
+    public boolean save(User user) {
+        String sql = "insert into oris.accounts (name, lastname, login, password) values (?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -53,6 +53,7 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(2, user.getLastname());
             preparedStatement.setString(3, user.getLogin());
             preparedStatement.setString(4, user.getPassword());
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -61,5 +62,30 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getById(Integer id) {
         return null;
+    }
+
+    @Override
+    public boolean getByLoginAndPassword(String login, String password) {
+        String sql = "select * from oris.accounts where login = ? and password = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            return preparedStatement.executeQuery().next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean getByLogin(String login) {
+        String sql = "select * from oris.accounts where login = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, login);
+            return preparedStatement.executeQuery().next() ;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

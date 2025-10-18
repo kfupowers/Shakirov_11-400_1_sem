@@ -1,4 +1,7 @@
-package com.solncev.servlet;
+package ru.kpfu.itis.shakirov.servlet;
+
+import ru.kpfu.itis.shakirov.dao.impl.UserDaoImpl;
+import ru.kpfu.itis.shakirov.service.impl.UserServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -13,7 +16,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.sendRedirect("login.html");
+        resp.sendRedirect("login.ftl");
     }
 
     @Override
@@ -21,7 +24,7 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        if ("login".equalsIgnoreCase(login) && "password".equalsIgnoreCase(password)) {
+        if (new UserServiceImpl().getByLoginAndPassword(login, password)) {
             // logic to authenticate user
 
             // session

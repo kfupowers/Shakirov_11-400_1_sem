@@ -1,4 +1,4 @@
-package com.solncev.filter;
+package ru.kpfu.itis.shakirov.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,6 @@
-package com.solncev.dao;
+package ru.kpfu.itis.shakirov.dao;
 
-import com.solncev.entity.User;
+import ru.kpfu.itis.shakirov.entity.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -9,8 +9,11 @@ public interface UserDao {
 
     List<User> getAll();
 
-    void save(User user) throws SQLException;
+    boolean save(User user) throws SQLException;
 
     User getById(Integer id);
 
+    boolean getByLoginAndPassword(String login, String password);
+
+    boolean getByLogin(String login);
 }

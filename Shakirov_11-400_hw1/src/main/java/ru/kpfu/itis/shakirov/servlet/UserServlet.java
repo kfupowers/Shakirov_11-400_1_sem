@@ -1,8 +1,8 @@
-package com.solncev.servlet;
+package ru.kpfu.itis.shakirov.servlet;
 
-import com.solncev.dto.UserDto;
-import com.solncev.service.UserService;
-import com.solncev.service.impl.UserServiceImpl;
+import ru.kpfu.itis.shakirov.dto.UserDto;
+import ru.kpfu.itis.shakirov.service.UserService;
+import ru.kpfu.itis.shakirov.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,6 +1,6 @@
 package ru.kpfu.itis.shakirov.http;
 
-public class User {
+public class UserForHttp {
     private int id;
     private String name;
     private String gender;
@@ -27,14 +27,14 @@ public class User {
         return status;
     }
 
-    public User(int id, String name, String gender, String email, String status) {
+    public UserForHttp(int id, String name, String gender, String email, String status) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.email = email;
         this.status = status;
     }
-    public User () {}
+    public UserForHttp() {}
 
     public void setId(int id) {
         this.id = id;

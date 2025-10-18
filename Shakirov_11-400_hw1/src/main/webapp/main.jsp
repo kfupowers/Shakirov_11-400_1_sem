@@ -5,11 +5,26 @@
     <title>Main page</title>
 </head>
 <body>
+<form action="http://localhost:8080/login">
+    <input type="submit" value="login">
+</form>
+
+<form action="http://localhost:8080/sign_up">
+    <input type="submit" value="signUp">
+</form>
+
+<form action="http://localhost:8080/logout">
+    <input type="submit" value="logout">
+</form>
+
+<form action="http://localhost:8080/user">
+    <input type="submit" value="users">
+</form>
 
 <%
     String sessionUser = (String) session.getAttribute("user");
     if (sessionUser == null) {
-        response.sendRedirect("login.html");
+        response.sendRedirect("login.ftl");
     }
 
     String cookieUser = "";
@@ -33,7 +48,7 @@
     <br>
     Session ID = <%=sessionId%>
     <br>
-    Cookie user = <%=cookieUser%>
+    Cookie userForHttp = <%=cookieUser%>
 </h3>
 
 </body>

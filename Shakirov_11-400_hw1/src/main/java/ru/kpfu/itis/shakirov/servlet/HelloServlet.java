@@ -1,4 +1,4 @@
-package com.solncev.servlet;
+package ru.kpfu.itis.shakirov.servlet;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,5 +22,19 @@ public class HelloServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         writer.println(body);
+    }
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        PrintWriter writer = resp.getWriter();
+        String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+
+        writer.println(body.replaceAll(",","PUT"));
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        PrintWriter writer = resp.getWriter();
+        String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        writer.println(body.replaceAll(",","\n"));
     }
 }

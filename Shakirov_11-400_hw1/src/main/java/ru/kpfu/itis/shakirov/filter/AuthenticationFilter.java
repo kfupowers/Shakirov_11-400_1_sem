@@ -1,4 +1,4 @@
-package com.solncev.filter;
+package ru.kpfu.itis.shakirov.filter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -25,12 +25,12 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String uri = httpServletRequest.getRequestURI();
         HttpSession session = httpServletRequest.getSession(false);
-        if (session == null && !uri.contains("login")) {
+        if (session == null && !uri.contains("login") && !uri.contains("hello") && !uri.contains("sign_up") && !uri.contains("index")) {
             ((HttpServletResponse) response).sendRedirect("/login");
         } else {
             chain.doFilter(request, response);
         }
-    }
+        }
 
     @Override
     public void destroy() {

@@ -1,4 +1,4 @@
-package com.solncev.util;
+package ru.kpfu.itis.shakirov.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +15,7 @@ public class DatabaseConnectionUtil {
                 connection = DriverManager.getConnection(
                         "jdbc:postgresql://localhost:5432/postgres",
                         "postgres",
-                        "postgres"
+                        "teamwork.tf"
                 );
             } catch (ClassNotFoundException | SQLException e) {
                 throw new RuntimeException(e);
